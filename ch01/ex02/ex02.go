@@ -1,13 +1,13 @@
 package main
 
 import (
-	"os"
 	"fmt"
+	"os"
 	"strconv"
 )
 
 func main() {
-	for i := 0; i< len(os.Args) ; i++  {
-		fmt.Println("index: " + strconv.Itoa(i) + ", value: "  + os.Args[i])
+	for i := 0; i < len(os.Args); i++ {
+		fmt.Println("index: " + strconv.Itoa(i) + ", value: " + os.Args[i])
 	}
 }
