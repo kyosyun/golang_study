@@ -12,8 +12,8 @@ import (
 )
 
 
-var RRGGBB = color.RGBA{0x00, 0x80, 0x00, 1 }
-var palette  = []color.Color{color.Black, RRGGBB, }
+var RRGGBB = color.RGBA{random(0, 255),random(0, 255),random(0, 255), 1}
+var palette  = []color.Color{color.Black, RRGGBB,color.RGBA{random(0, 8),random(0, 8),random(0, 8), 1}}
 
 const (
 	whiteIndex = 0
@@ -49,4 +49,9 @@ func lissajous(out io.Writer) {
 		anim.Image = append(anim.Image, img)
 	}
 	gif.EncodeAll(out, &anim)
+}
+
+func random(min, max float64) uint8 {
+	rand.Seed(time.Now().UnixNano())
+	return uint8(rand.Float64()*(max-min) + min)
 }

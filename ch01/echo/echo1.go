@@ -1,5 +1,5 @@
 //Echo1はそのコマンドライン引数を表示する。
-package main
+package echo
 
 import (
 	"os"

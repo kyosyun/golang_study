@@ -1,5 +1,5 @@
 //標準入力から2階以上現れる行を出現回数と一緒に表示する
-package main
+package dup1
 
 import (
 	"bufio"
