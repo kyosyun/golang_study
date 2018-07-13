@@ -1,13 +1,16 @@
-package main
+package ex02
 
 import (
-	"fmt"
 	"os"
-	"strconv"
+	"fmt"
 )
 
 func main() {
-	for i := 0; i < len(os.Args); i++ {
-		fmt.Println("index: " + strconv.Itoa(i) + ", value: " + os.Args[i])
+	Join(os.Args)
+}
+
+func Join(args []string) {
+	for i := 1; i < len(os.Args); i++ {
+		fmt.Print(args[i] + ",")
 	}
 }
