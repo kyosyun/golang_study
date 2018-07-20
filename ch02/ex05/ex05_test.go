@@ -4,6 +4,7 @@ import (
 	"golang_study/ch02/ex03"
 	"golang_study/ch02/ex04"
 	"golang_study/ch02/ex05"
+	"golang_study/ch02/popcount"
 	"testing"
 )
 
@@ -14,6 +15,13 @@ func TestPopcount(t *testing.T) {
 		} else {
 			t.Error("fail: when:", i, "i: ", ex05.PopCount(uint64(i)), "expected: ", ex04.PopCount(uint64(i)))
 		}
+	}
+}
+
+func BenchmarkPopCount(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		// ロジックによって0や1の処理のスピードが偏るので、PopCountの引数をばらつかせる
+		popcount.PopCount(uint64(b.N % 255))
 	}
 }
 
@@ -30,7 +38,7 @@ func BenchmarkPopCountEx04(b *testing.B) {
 	}
 }
 
-func BenchmarkPopCountEx05_(b *testing.B) {
+func BenchmarkPopCountEx05(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		ex05.PopCount(uint64(b.N % 255))
 	}
