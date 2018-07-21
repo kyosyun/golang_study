@@ -1,4 +1,4 @@
-package surface
+package main
 
 import (
 	"fmt"
@@ -22,7 +22,7 @@ func main() {
 		"width='%d' height='%d'>", width, height)
 	for i := 0; i < cells; i++ {
 		for j := 0; j < cells; j++ {
-			ax, ay := corner(i+1, j)
+			ax, ay := surface.corner(i+1, j)
 			bx, by := corner(i, j)
 			cx, cy := corner(i, j+1)
 			dx, dy := corner(i+1, j+1)
@@ -31,21 +31,4 @@ func main() {
 		}
 	}
 	fmt.Println("</svg>")
-}
-
-func corner(i, j int) (float64, float64) {
-	x := xyrange * (float64(i)/cells - 0.5)
-	y := xyrange * (float64(j)/cells - 0.5)
-
-	z := F(x, y)
-
-	sx := width/2 + (x-y)*cos30*xyscale
-	sy := height/2 + (x+y)*sin30*xyscale - z*zscale
-
-	return sx, sy
-}
-
-func F(x, y float64) float64 {
-	r := math.Hypot(x, y)
-	return math.Sin(r)
 }
