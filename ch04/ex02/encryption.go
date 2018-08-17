@@ -35,6 +35,5 @@ func main() {
 		fmt.Printf("sum256:%x\n", sumResult256)
 		fmt.Printf("sum384:%x\n", sumResult384)
 		fmt.Printf("sum512:%x\n", sumResult512)
-
 	}
 }

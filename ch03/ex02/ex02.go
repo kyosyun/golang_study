@@ -1,3 +1,4 @@
+//P236 参照
 package main
 
 import (

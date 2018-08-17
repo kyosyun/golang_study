@@ -21,3 +21,11 @@ func TestCheckSum(t *testing.T) {
 	println(ex01.CheckSum(sha256.Sum256([]byte(sum1)),sha256.Sum256([]byte(sum4))))
 	println(ex01.CheckSum(sha256.Sum256([]byte(sum1)),sha256.Sum256([]byte(sum5))))
 }
+
+func TestCheckSum2(t *testing.T) {
+	//for _, test = struct {
+	//
+	//}{}{
+	//
+	//}
+}

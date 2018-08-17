@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math"
 	"net/url"
+	"strconv"
 )
 
 const (
@@ -29,11 +30,11 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	u, _ := url.Parse(r.URL.Path)
+	u, ok := url.Parse(r.URL.Path)
 	query := u.Query()
-	if(query["height"] != nil) {
-		height =
-	}
+	//if ok {
+	//	height = strconv.Itoa(query["height"])
+	//}
 	w.Header().Set("Content-Type","image/svg+xml")
 	//fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
 	printSvgData(w)

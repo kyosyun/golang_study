@@ -1,5 +1,7 @@
 // []stringスライス内で隣接している重複をスライス内で除去する関数を書く
-package ex05
+package main
+
+import "fmt"
 
 func deleteDuplicate(str []string) []string {
 	if len(str) == 0 {
@@ -16,4 +18,10 @@ func deleteDuplicate(str []string) []string {
 	}
 
 	return str[:current+1]
+}
+
+func main(){
+	a := []string{"hoo","hoo","var","var","hoo"}
+	fmt.Println(a)
+	fmt.Println(deleteDuplicate(a))
 }

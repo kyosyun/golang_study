@@ -22,15 +22,17 @@ func main() {
 //htmlNode: 最初は標準入力の内容を受け取る。
 func visit(links []string, n *html.Node) []string {
 
-	//
+	// aタグの場合の処理
 	if n.Type == html.ElementNode && n.Data == "a" {
 		for _, a := range n.Attr {
+			// keyがhrefの場合
 			if a.Key == "href" {
 				links = append(links, a.Val)
 				fmt.Println(links)
 			}
 		}
 	}
+
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		links = visit(links, c)
 	}

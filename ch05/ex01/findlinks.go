@@ -16,24 +16,21 @@ func main() {
 	}
 
 	//標準入力の内容を処理するして、linkの配列を作成し、printを行う。
-	for _, link := range visit(nil, doc) {
-		fmt.Println(link)
-	}
+	visit(doc)
 }
 
 //htmlNode: 最初は標準入力の内容を受け取る。
-func visit(links []string, n *html.Node) []string {
+func visit(n *html.Node) {
 
 	//
 	if n.Type == html.ElementNode && n.Data == "a" {
 		for _, a := range n.Attr {
 			if a.Key == "href" {
-				links = append(links, a.Val)
+				println(a.Val)
 			}
 		}
 	}
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		links = visit(links, c)
+		visit(c)
 	}
-	return links
 }
