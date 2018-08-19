@@ -19,10 +19,9 @@ func main() {
 	visit(doc)
 }
 
-//htmlNode: 最初は標準入力の内容を受け取る。
+//htmlNode: 最初は標準入力の内容を受け取る。内部で子ノードにたいして　再帰呼び出しを行う。
 func visit(n *html.Node) {
 
-	//
 	if n.Type == html.ElementNode && n.Data == "a" {
 		for _, a := range n.Attr {
 			if a.Key == "href" {
