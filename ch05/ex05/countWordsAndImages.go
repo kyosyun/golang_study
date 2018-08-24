@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"strings"
-
 	"os"
+
+	"bufio"
+	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -47,21 +48,18 @@ func countWordsAndImages(n *html.Node) (words, images int) {
 
 	//単語数をカウントする。
 	if n.Type == html.TextNode {
-		wl := strings.Split(n.Data, " ")
-		words += len(wl)
-		for _, w := range wl {
-			if len(strings.TrimSpace(w)) > 0 {
-				//デバッグ用　wordを出力する
-				println(strings.TrimSpace(w))
-				words++
-			}
+		input := bufio.NewScanner(strings.NewReader(n.Data))
+		input.Split(bufio.ScanWords)
+		for input.Scan() {
+			//println(input.Text())
+			words++
 		}
 	}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		w, i := countWordsAndImages(c)
-		images += i
 		words += w
+		images += i
 	}
 	return words, images
 }
