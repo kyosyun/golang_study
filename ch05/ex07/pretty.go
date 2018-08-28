@@ -1,4 +1,4 @@
-package main
+package pretty
 
 import (
 	"fmt"
@@ -7,6 +7,8 @@ import (
 	"os"
 
 	"strings"
+
+	"io"
 
 	"golang.org/x/net/html"
 )
@@ -19,14 +21,18 @@ var depth int
 //[x]要素が子を持たない場合には、一行でタグを閉じる
 //[]テストコードを書く
 
-func main() {
-	for i := 0; i < len(os.Args); i++ {
-		prettyPrint(os.Args[i])
-	}
-}
+// テストコードを書くために指定
+var writer io.Writer
+
+//func main() {
+//	for i := 0; i < len(os.Args); i++ {
+//		prettyPrint(os.Args[i])
+//	}
+//}
 
 // urlへGETリクエストを行い、ドキュメント内に含まれる単語と画像の数を返す。
 func prettyPrint(url string) {
+	writer = os.Stdout
 	resp, err := http.Get(url)
 	if err != nil {
 		return
@@ -64,26 +70,28 @@ func forEachNode(n *html.Node, pre, post func(n *html.Node, hasChild bool)) {
 
 func startElement(n *html.Node, hasChild bool) {
 	switch n.Type {
+	case html.DoctypeNode:
+		fmt.Fprintf(writer, "<!DOCTYPE %s>\n", n.Data)
 	case html.ElementNode:
 		//インデントしてタグの開始
-		fmt.Printf("%*s<%s", depth*2, "", n.Data)
+		fmt.Fprintf(writer, "%*s<%s", depth*2, "", n.Data)
 		//要素を出力する
 		for _, a := range n.Attr {
-			fmt.Printf(" %s=%s", a.Key, a.Val)
+			fmt.Fprintf(writer, " %s=\"%s\"", a.Key, a.Val)
 		}
 		//タグの終了を出力
 		if hasChild {
-			fmt.Printf(">\n")
+			fmt.Fprint(writer, ">\n")
 			depth++
 		} else {
-			fmt.Printf("/>\n")
+			fmt.Fprintf(writer, "/>\n")
 		}
 	case html.TextNode:
 		if len(strings.TrimSpace(n.Data)) > 0 {
-			fmt.Printf("%*s%s\n", depth*2, "", n.Data)
+			fmt.Fprintf(writer, "%*s%s\n", depth*2, "", n.Data)
 		}
 	case html.CommentNode:
-		fmt.Printf("%*s<!-- %s -->\n", depth*2, "", n.Data)
+		fmt.Fprintf(writer, "%*s<!-- %s -->\n", depth*2, "", n.Data)
 	}
 }
 
@@ -91,7 +99,7 @@ func endElement(n *html.Node, hasChild bool) {
 	if n.Type == html.ElementNode {
 		if hasChild {
 			depth--
-			fmt.Printf("%*s</%s>\n", depth*2, "", n.Data)
+			fmt.Fprintf(writer, "%*s</%s>\n", depth*2, "", n.Data)
 		}
 	}
 }
