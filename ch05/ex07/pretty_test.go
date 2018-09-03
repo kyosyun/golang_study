@@ -20,10 +20,19 @@ func TestForEachNode(t *testing.T) {
 <meta charset="UTF-8" />
 <title>サイト名</title>
 <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-<!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-<!--[endif]-->
 </head>
+<body>
+<div id="wrap">
+<header id="head"><h1>サイト名</h1></header>
+<nav id="navi"><ul><li><a href="./">Home</a></li></ul></nav>
+<article class="post">
+<h2>記事タイトル</h2>
+<p>html5の構造化タグを使った練習ページ。</p>
+</article>
+<footer id="foot"><a href="./">サイト名</a></footer>
+</div>
+</body>
 </html>
 `,
 			`<!DOCTYPE html>
@@ -34,11 +43,38 @@ func TestForEachNode(t *testing.T) {
       サイト名
     </title>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
-    <!-- [if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-<!--[endif] -->
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"/>
   </head>
   <body>
+    <div id="wrap">
+      <header id="head">
+        <h1>
+          サイト名
+        </h1>
+      </header>
+      <nav id="navi">
+        <ul>
+          <li>
+            <a href="./">
+              Home
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <article class="post">
+        <h2>
+          記事タイトル
+        </h2>
+        <p>
+          html5の構造化タグを使った練習ページ。
+        </p>
+      </article>
+      <footer id="foot">
+        <a href="./">
+          サイト名
+        </a>
+      </footer>
+    </div>
   </body>
 </html>
 `},
@@ -56,47 +92,3 @@ func TestForEachNode(t *testing.T) {
 		}
 	}
 }
-
-// <body>
-// <div id="wrap">
-// <header id="head"><h1>サイト名</h1></header>
-// <nav id="navi"><ul><li><a href="./">Home</a></li></ul></nav>
-// <article class="post">
-// <h2>記事タイトル</h2>
-// <p>html5の構造化タグを使った練習ページ。</p>
-// </article>
-// <footer id="foot"><a href="./">サイト名</a></footer>
-// </div>
-// </body>
-
-//  <body>
-//    <div id="wrap">
-//      <header id="head">
-//        <h1>
-//          サイト名
-//        </h1>
-//      </header>
-//      <nav id="navi">
-//        <ul>
-//          <li>
-//            <a href="./">
-//              Home
-//            </a>
-//          </li>
-//        </ul>
-//      </nav>
-//      <article class="post">
-//        <h2>
-//          記事タイトル
-//        </h2>
-//        <p>
-//          html5の構造化タグを使った練習ページ。
-//        </p>
-//      </article>
-//      <footer id="foot">
-//        <a href="./">
-//          サイト名
-//        </a>
-//      </footer>
-//    </div>
-//  </body>
